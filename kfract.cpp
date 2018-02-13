@@ -15,7 +15,7 @@ kfract::kfract() : level(0) , kfract_const(1)
 
 kfract::kfract(int Level, int Kfract_const) : level(Level) , kfract_const(Kfract_const)
 {
-  kfract_fractal = new int[4][1];
+  kfract_fractal = new int[kfract_const][1];
 }
 
 

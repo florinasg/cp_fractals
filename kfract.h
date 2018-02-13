@@ -24,7 +24,7 @@ private:
 	int level;
 	int kfract_const;
 	//pointer to fractal_array
-	int  (*kfract_fractal)[4];
+	int  (*kfract_fractal)[1];
 };
 
 #endif /* KFRACT_H_ */
