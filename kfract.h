@@ -11,20 +11,28 @@
 class kfract {
 public:
 	kfract();
-	kfract(int Level, int Kfract_const);
+	kfract(int Level_final, int Kfract_const, int Kfract_vector_L);
 
 	virtual ~kfract();
 
-	int construct_kfract(int Level);
+	/*construt_kfract gets called recursively*/
+	int construct_kfract();
 	int get_level();
-	void set_level(int new_level);
+
+
 
 
 private:
-	int level;
+	int level_final;
+	int level_current;
 	int kfract_const;
+	int kfract_vector_L;
 	//pointer to fractal_array
-	int  (*kfract_fractal)[1];
+	int  (*kfract_fractal)[2];
+
+	static double fract_inital_struct;
+	static double fract_step_struct;
+
 };
 
 #endif /* KFRACT_H_ */
