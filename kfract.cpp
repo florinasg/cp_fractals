@@ -9,6 +9,7 @@
 #include <array>
 #include <fstream>
 #include <iostream>
+#include <algorithm>
 
 
 double x_0,y_0,x_1,y_1;
@@ -27,6 +28,37 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 			{kfract_const, kfract_const},
 			{kfract_const, 0},
 			{0,0}};
+
+
+	/*Defines grid constant for koch fractal*/
+	kfract_grid_constant = kfract_const;
+	kfract_grid.resize(kfract_const/kfract_grid_constant);
+
+	for(int idx = 0; idx < level_final; idx++)
+	{
+		kfract_grid_constant = kfract_grid_constant/4;
+	}
+
+	/*Creates grid & tags grip-point with marker*/
+
+	double x_grid, y_grid = 0;
+
+	for(int jdx = 0;jdx<kfract_const/kfract_grid_constant; jdx++)
+	{
+		x_grid = x_grid + kfract_grid_constant;
+		for(int gdx=0;gdx<kfract_const/kfract_grid_constant;gdx++)
+		{
+			y_grid = y_grid + kfract_grid_constant;
+
+			kfract_grid.push_back(std::vector<double>());
+			kfract_grid[jdx].push_back(double());
+			kfract_grid[jdx][0] = x_grid;
+			kfract_grid[jdx].push_back(double());
+			kfract_grid[jdx][1] = y_grid;
+
+		}
+	}
+
 }
 
 kfract::~kfract()
@@ -190,7 +222,7 @@ int kfract::export_kfract_data()
 {
 	int idx;
 	std::ofstream kfract_data;
-	kfract_data.open("kfract_data.txt");
+	kfract_data.open("kfract_data_level2.txt");
 
 	/*Loop writes data to file*/
 	for(idx=0;idx < kfract_vector_L;idx++)
@@ -200,8 +232,16 @@ int kfract::export_kfract_data()
 
 	kfract_data.close();
 
-	std::cout << "Finished successfully" << std::endl;
+	std::cout << "Finished successfully\n" <<"Grid constant 'rho': "<< kfract_grid_constant << std::endl;
 
+	return 0;
+}
+
+int kfract::tag_grid()
+{
+	std::find(kf)
+	
+	
 	return 0;
 }
 

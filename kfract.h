@@ -24,6 +24,8 @@ public:
 	int get_level();
 
 	int export_kfract_data();
+	
+	int tag_grid();
 
 
 
@@ -33,6 +35,12 @@ private:
 	int level_current;
 	double kfract_const;
 	int kfract_vector_L;
+	
+	
+	double kfract_grid_constant;
+	
+	std::vector<std::vector<double>> kfract_grid;
+	
 	//pointer to fractal_array
 	std::vector<std::vector<double>> kfract_fractal;
 	//int  (*kfract_fractal)[2];
