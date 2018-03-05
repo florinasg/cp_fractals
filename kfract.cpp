@@ -10,7 +10,8 @@
 #include <fstream>
 #include <iostream>
 
-int temp_coord_matrix[9][2];
+
+double x_0,y_0,x_1,y_1;
 
 kfract::kfract() : level_final(0) , kfract_const(1)
 {
@@ -68,7 +69,7 @@ int kfract::construct_kfract()
 	/*Update fractal constant*/
 	kfract_const = kfract_const/4;
 
-	double x_0,y_0,x_1,y_1;
+
 	double xdummy, ydummy;
 
 
@@ -80,6 +81,7 @@ int kfract::construct_kfract()
 	for(idx=0; idx < number_gridP_nminusone; idx++)
 	{
 
+		int dummy_idx = idx;
 		x_0 = x_1;
 		y_0 = y_1;
 		if(idx == 0)
@@ -87,8 +89,14 @@ int kfract::construct_kfract()
 			x_0 = kfract_fractal_temp.at(idx).at(0);
 			y_0 = kfract_fractal_temp.at(idx).at(1);
 		}
-		x_1 = kfract_fractal_temp.at(idx+1).at(0);
-		y_1 = kfract_fractal_temp.at(idx+1).at(1);
+
+		if(idx+1 == number_gridP_nminusone)
+		{
+			dummy_idx = -1;
+		}
+
+		x_1 = kfract_fractal_temp.at(dummy_idx+1).at(0);
+		y_1 = kfract_fractal_temp.at(dummy_idx+1).at(1);
 
 
 		/*Algorithm to create fractal-base-step-structure*/
@@ -136,25 +144,35 @@ int kfract::construct_kfract()
 
 		}
 
-		std::cout << kfract_fractal.size();
+		//std::cout << kfract_fractal.size();
 
 		for(jdx=curr_pos;jdx<curr_pos+8;jdx++)
 		{
 
-			kfract_fractal.push_back(temp_coord_matrix.at(jdx));
+			kfract_fractal.push_back(std::vector<double>());
+			kfract_fractal[jdx].push_back(double());
+			kfract_fractal[jdx][0] = temp_coord_matrix.at(jdx-curr_pos).at(0);
+			kfract_fractal[jdx].push_back(double());
+			kfract_fractal[jdx][1] = temp_coord_matrix.at(jdx-curr_pos).at(1);
+
+			//kfract_fractal[jdx][1] = temp_coord_matrix.at(jdx-curr_pos).at(1);
 
 		}
 
 		curr_pos = jdx;
 
-		level_current = level_current +1;
 
-		/*Recursion ;)*/
-		if(level_current<level_final)
-			this->construct_kfract();
+
 
 
 	}
+
+
+	level_current = level_current +1;
+
+	/*Recursion ;)*/
+	if(level_current<level_final)
+		this->construct_kfract();
 
 	return 0;
 }
@@ -175,13 +193,14 @@ int kfract::export_kfract_data()
 	kfract_data.open("kfract_data.txt");
 
 	/*Loop writes data to file*/
-	for(idx=0;idx < kfract_fractal.size();idx++)
+	for(idx=0;idx < kfract_vector_L;idx++)
 	{
-		kfract_data << kfract_fractal[idx][0] << "," << kfract_fractal[idx][1] << "\n";
+		kfract_data << kfract_fractal.at(idx).at(0) << "," << kfract_fractal.at(idx).at(1) << "\n";
 	}
 
 	kfract_data.close();
 
+	std::cout << "Finished successfully" << std::endl;
 
 	return 0;
 }
