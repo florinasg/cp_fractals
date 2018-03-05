@@ -11,11 +11,13 @@
 
 int main(int args, char * argv[])
 {
-	kfract * koch_fractal_1 = new kfract(20,KFRACT_BASE_CONST,4);
+	/*Configures koch fractal*/
+	kfract * koch_fractal_1 = new kfract(2,KFRACT_BASE_CONST,4);
 
-	int g = koch_fractal_1->get_level();
+	/*Constructs koch fractal*/
+	koch_fractal_1->construct_kfract();
 
-	std::cout << "kfract_level: " << g << std::endl;
+	koch_fractal_1->export_kfract_data();
 
 	return 0;
 }
