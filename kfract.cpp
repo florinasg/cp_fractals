@@ -239,9 +239,9 @@ int kfract::export_kfract_data()
 
 int kfract::tag_grid()
 {
-	std::find(kf)
 	
 	
+
 	return 0;
 }
 

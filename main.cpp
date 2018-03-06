@@ -12,7 +12,7 @@
 int main(int args, char * argv[])
 {
 	/*Configures koch fractal*/
-	kfract * koch_fractal_1 = new kfract(2,KFRACT_BASE_CONST,4);
+	kfract * koch_fractal_1 = new kfract(1,KFRACT_BASE_CONST,4);
 
 	/*Constructs koch fractal*/
 	koch_fractal_1->construct_kfract();
