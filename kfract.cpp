@@ -102,7 +102,7 @@ int kfract::construct_kfract()
 	kfract_const = kfract_const/4;
 
 
-	double xdummy, ydummy;
+
 
 
 
@@ -137,43 +137,60 @@ int kfract::construct_kfract()
 		{
 			if(x_1 < x_0)
 			{
-				xdummy = x_0;
-				x_0 = x_1;
-				x_1 = xdummy;
+				temp_coord_matrix = {
+						{x_0,y_0},
+						{x_0-kfract_const, y_0},
+						{x_0-kfract_const, y_0-kfract_const},
+						{x_0-kfract_const-kfract_const, y_0-kfract_const},
+						{x_0-kfract_const-kfract_const, y_0},
+						{x_0-kfract_const-kfract_const, y_0+kfract_const},
+						{x_0-kfract_const-2*kfract_const, y_0+kfract_const},
+						{x_0-kfract_const-2*kfract_const, y_0},
+				};
 			}
-
-			temp_coord_matrix = {
-					{x_0,y_0},
-					{x_0+kfract_const, y_0},
-					{x_0+kfract_const, y_0+kfract_const},
-					{x_0+kfract_const+kfract_const, y_0+kfract_const},
-					{x_0+kfract_const+kfract_const, y_0},
-					{x_0+kfract_const+kfract_const, y_0-kfract_const},
-					{x_0+kfract_const+2*kfract_const, y_0-kfract_const},
-					{x_0+kfract_const+2*kfract_const, y_0},
-			};
+			else
+			{
+				temp_coord_matrix = {
+						{x_0,y_0},
+						{x_0+kfract_const, y_0},
+						{x_0+kfract_const, y_0+kfract_const},
+						{x_0+kfract_const+kfract_const, y_0+kfract_const},
+						{x_0+kfract_const+kfract_const, y_0},
+						{x_0+kfract_const+kfract_const, y_0-kfract_const},
+						{x_0+kfract_const+2*kfract_const, y_0-kfract_const},
+						{x_0+kfract_const+2*kfract_const, y_0},
+				};
+			}
 		}
 
 		else if(x_1 - x_0 == 0)
 		{
 			if(y_1 > y_0)
 			{
-				ydummy = y_0;
-				y_0 = y_1;
-				y_1 = ydummy;
+				temp_coord_matrix= {
+						{x_0,y_0},
+						{x_0, y_0+kfract_const},
+						{x_0-kfract_const, y_0+kfract_const},
+						{x_0-kfract_const, y_0+2*kfract_const},
+						{x_0, y_0+2*kfract_const},
+						{x_0+kfract_const, y_0+2*kfract_const},
+						{x_0+kfract_const, y_0+3*kfract_const},
+						{x_0, y_0+3*kfract_const},
+				};
 			}
-
-			temp_coord_matrix= {
-					{x_0,y_0},
-					{x_0, y_0-kfract_const},
-					{x_0+kfract_const, y_0-kfract_const},
-					{x_0+kfract_const, y_0-2*kfract_const},
-					{x_0, y_0-2*kfract_const},
-					{x_0-kfract_const, y_0-2*kfract_const},
-					{x_0-kfract_const, y_0-3*kfract_const},
-					{x_0, y_0-3*kfract_const},
-			};
-
+			else
+			{
+				temp_coord_matrix= {
+						{x_0,y_0},
+						{x_0, y_0-kfract_const},
+						{x_0+kfract_const, y_0-kfract_const},
+						{x_0+kfract_const, y_0-2*kfract_const},
+						{x_0, y_0-2*kfract_const},
+						{x_0-kfract_const, y_0-2*kfract_const},
+						{x_0-kfract_const, y_0-3*kfract_const},
+						{x_0, y_0-3*kfract_const},
+				};
+			}
 		}
 
 		//std::cout << kfract_fractal.size();
@@ -222,7 +239,7 @@ int kfract::export_kfract_data()
 {
 	int idx;
 	std::ofstream kfract_data;
-	kfract_data.open("kfract_data_level2.txt");
+	kfract_data.open("kfract_data.txt");
 
 	/*Loop writes data to file*/
 	for(idx=0;idx < kfract_vector_L;idx++)
@@ -239,8 +256,8 @@ int kfract::export_kfract_data()
 
 int kfract::tag_grid()
 {
-	
-	
+
+
 
 	return 0;
 }
