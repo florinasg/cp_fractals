@@ -35,6 +35,7 @@ private:
 	int level_current;
 	double kfract_const;
 	int kfract_vector_L;
+	double kfract_const_init;
 	
 	
 	double kfract_grid_constant;

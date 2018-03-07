@@ -10,6 +10,7 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <string.h>
 
 
 double x_0,y_0,x_1,y_1;
@@ -31,6 +32,7 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 
 
 	/*Defines grid constant for koch fractal*/
+	kfract_const_init = kfract_const;
 	kfract_grid_constant = kfract_const;
 	kfract_grid.resize(kfract_const/kfract_grid_constant);
 
@@ -239,7 +241,7 @@ int kfract::export_kfract_data()
 {
 	int idx;
 	std::ofstream kfract_data;
-	kfract_data.open("kfract_data.txt");
+	kfract_data.open("kfract_data"+std::to_string(level_final)+".csv");
 
 	/*Loop writes data to file*/
 	for(idx=0;idx < kfract_vector_L;idx++)
@@ -247,6 +249,7 @@ int kfract::export_kfract_data()
 		kfract_data << kfract_fractal.at(idx).at(0) << "," << kfract_fractal.at(idx).at(1) << "\n";
 	}
 
+	kfract_data << "0" << "," << kfract_const_init << "\n";
 	kfract_data.close();
 
 	std::cout << "Finished successfully\n" <<"Grid constant 'rho': "<< kfract_grid_constant << std::endl;
