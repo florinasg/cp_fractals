@@ -8,7 +8,7 @@
 #include<kfract.h>
 #include <cstdlib>
 
-#define KFRACT_BASE_CONST 1000
+#define KFRACT_BASE_CONST 1
 
 int main(int args, char * argv[])
 {
@@ -19,7 +19,11 @@ int main(int args, char * argv[])
 	/*Constructs koch fractal*/
 	koch_fractal_1->construct_kfract();
 
+
+
 	koch_fractal_1->export_kfract_data();
+
+
 
 	return 0;
 }

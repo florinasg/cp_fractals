@@ -34,7 +34,7 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 	/*Defines grid constant for koch fractal*/
 	kfract_const_init = kfract_const;
 	kfract_grid_constant = kfract_const;
-	kfract_grid.resize(kfract_const/kfract_grid_constant);
+	kfract_grid.resize((kfract_const/kfract_grid_constant)*2);
 
 	for(int idx = 0; idx < level_final; idx++)
 	{
@@ -45,10 +45,10 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 
 	double x_grid, y_grid = 0;
 
-	for(int jdx = 0;jdx<kfract_const/kfract_grid_constant; jdx++)
+	for(int jdx = 0;jdx<(kfract_const/kfract_grid_constant)*2; jdx++)
 	{
 		x_grid = x_grid + kfract_grid_constant;
-		for(int gdx=0;gdx<kfract_const/kfract_grid_constant;gdx++)
+		for(int gdx=0;gdx<(kfract_const/kfract_grid_constant)*2;gdx++)
 		{
 			y_grid = y_grid + kfract_grid_constant;
 
@@ -58,8 +58,11 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 			kfract_grid[jdx].push_back(double());
 			kfract_grid[jdx][1] = y_grid;
 
+
 		}
 	}
+
+
 
 }
 
@@ -92,6 +95,7 @@ int kfract::construct_kfract()
 
 
 	std::vector<std::vector<double>> temp_coord_matrix;
+	temp_coord_matrix.resize(8);
 
 
 	/*Delete previous matrix*/
@@ -195,7 +199,8 @@ int kfract::construct_kfract()
 			}
 		}
 
-		//std::cout << kfract_fractal.size();
+		this->tag_grid(temp_coord_matrix);
+
 
 		for(jdx=curr_pos;jdx<curr_pos+8;jdx++)
 		{
@@ -206,7 +211,7 @@ int kfract::construct_kfract()
 			kfract_fractal[jdx].push_back(double());
 			kfract_fractal[jdx][1] = temp_coord_matrix.at(jdx-curr_pos).at(1);
 
-			//kfract_fractal[jdx][1] = temp_coord_matrix.at(jdx-curr_pos).at(1);
+
 
 		}
 
@@ -257,8 +262,18 @@ int kfract::export_kfract_data()
 	return 0;
 }
 
-int kfract::tag_grid()
+int kfract::tag_grid(std::vector<std::vector<double>> vec)
 {
+	std::vector<std::vector<double>>::iterator it;
+	int index;
+	for(int jdx=0;jdx<8;jdx++)
+	{
+		std::vector<double> p = {vec.at(jdx).at(0),vec.at(jdx).at(1)};
+		it = std::find(kfract_grid.begin(), kfract_grid.end(),p);
+		index = std::distance(kfract_grid.begin(), it);
+		kfract_grid[index].push_back(double());
+		kfract_grid[index][1] = -1;
+	}
 
 
 

@@ -25,7 +25,7 @@ public:
 
 	int export_kfract_data();
 	
-	int tag_grid();
+	int tag_grid(std::vector<std::vector<double>> vec);
 
 
 
