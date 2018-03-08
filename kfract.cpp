@@ -33,8 +33,8 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 
 	/*Defines grid constant for koch fractal*/
 	kfract_const_init = kfract_const;
-	kfract_grid_constant = kfract_const;
-	kfract_grid.resize((kfract_const/kfract_grid_constant)*2);
+	kfract_grid_constant = kfract_const_init;
+	kfract_grid.resize(1000);
 
 	for(int idx = 0; idx < level_final; idx++)
 	{
@@ -43,23 +43,31 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 
 	/*Creates grid & tags grip-point with marker*/
 
-	double x_grid, y_grid = 0;
+	double x_grid = -1;
+	double y_grid = -1;
+	int sum_idx = 0;
 
-	for(int jdx = 0;jdx<(kfract_const/kfract_grid_constant)*2; jdx++)
+	for(int jdx = 0;jdx<1000; jdx++)
 	{
-		x_grid = x_grid + kfract_grid_constant;
-		for(int gdx=0;gdx<(kfract_const/kfract_grid_constant)*2;gdx++)
+
+		y_grid = -1;
+		for(int gdx=0;gdx<1000;gdx++)
 		{
-			y_grid = y_grid + kfract_grid_constant;
+
 
 			kfract_grid.push_back(std::vector<double>());
-			kfract_grid[jdx].push_back(double());
-			kfract_grid[jdx][0] = x_grid;
-			kfract_grid[jdx].push_back(double());
-			kfract_grid[jdx][1] = y_grid;
+			kfract_grid[sum_idx].push_back(double());
+			kfract_grid[sum_idx][0] = x_grid;
+			kfract_grid[sum_idx].push_back(double());
+			kfract_grid[sum_idx][1] = y_grid;
 
+			//    std::cout << kfract_grid[sum_idx][0] << " " << kfract_grid[sum_idx][1] << std::endl;
+
+			y_grid = y_grid + kfract_grid_constant;
+			sum_idx+=1;
 
 		}
+		x_grid = x_grid + kfract_grid_constant;
 	}
 
 
@@ -199,7 +207,6 @@ int kfract::construct_kfract()
 			}
 		}
 
-		this->tag_grid(temp_coord_matrix);
 
 
 		for(jdx=curr_pos;jdx<curr_pos+8;jdx++)
@@ -229,6 +236,10 @@ int kfract::construct_kfract()
 	/*Recursion ;)*/
 	if(level_current<level_final)
 		this->construct_kfract();
+
+
+	/*tags grid points*/
+	this->tag_grid(kfract_fractal);
 
 	return 0;
 }
@@ -264,17 +275,28 @@ int kfract::export_kfract_data()
 
 int kfract::tag_grid(std::vector<std::vector<double>> vec)
 {
+	try
+	{
 	std::vector<std::vector<double>>::iterator it;
 	int index;
-	for(int jdx=0;jdx<8;jdx++)
-	{
-		std::vector<double> p = {vec.at(jdx).at(0),vec.at(jdx).at(1)};
-		it = std::find(kfract_grid.begin(), kfract_grid.end(),p);
-		index = std::distance(kfract_grid.begin(), it);
-		kfract_grid[index].push_back(double());
-		kfract_grid[index][1] = -1;
-	}
 
+	for(int jdx=0;jdx<vec.size()-1;jdx++)
+	{
+		std::cout << "vector: " << vec.at(jdx).at(0) << " " << vec.at(jdx).at(1) << std::endl;
+		std::vector<double> p = {vec.at(jdx).at(0),vec.at(jdx).at(1)};
+		it = std::find(kfract_grid.begin(), kfract_grid.end(), p);
+		index = std::distance(kfract_grid.begin(), it);
+		//std::cout << "values at *index*: "<< kfract_grid[index].at(0) << " " << kfract_grid[index].at(1) << std::endl;
+		kfract_grid[index].push_back(double());
+		kfract_grid[index][2] = -1;
+		std::cout << "values at index " << index << " "<< kfract_grid[index].at(0) << " " << kfract_grid[index].at(1) << " " << kfract_grid[index].at(2) << std::endl;
+	};
+}
+
+	catch(std::exception &e)
+	{
+		std::cout << "error occured: " << e.what() << std::endl;
+	}
 
 
 	return 0;
