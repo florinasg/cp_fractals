@@ -25,8 +25,10 @@ public:
 
 	int export_kfract_data();
 	
-	int tag_grid(std::vector<std::vector<double>> vec);
-
+	int tag_grid();
+	
+	
+	std::vector<std::vector<double>> get_kfract_fractal();
 
 
 
@@ -36,6 +38,7 @@ private:
 	double kfract_const;
 	int kfract_vector_L;
 	double kfract_const_init;
+	int grid_vector_num;
 	
 	
 	double kfract_grid_constant;

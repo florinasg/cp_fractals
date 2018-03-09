@@ -11,6 +11,8 @@
 #include <iostream>
 #include <algorithm>
 #include <string.h>
+#include <cmath>
+
 
 
 double x_0,y_0,x_1,y_1;
@@ -41,17 +43,38 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 		kfract_grid_constant = kfract_grid_constant/4;
 	}
 
-	/*Creates grid & tags grip-point with marker*/
+	/*Creates grid & tags grip-point with marker in function (see method-call in main())*/
 
-	double x_grid = -1;
-	double y_grid = -1;
+	/*defines grid*/
+	double x_grid = kfract_const_init;
+	double y_grid = kfract_const_init;
+	double y_grid_reset = 0;
+	double x_grid_reset = 0;
+	for(int idx = 1; idx <= level_final; idx++)
+	{
+		x_grid = x_grid + kfract_const_init/(pow(4,idx));
+		y_grid = y_grid + kfract_const_init/(pow(4,idx));
+	}
+
+	/*Start Coordinates*/
+	x_grid = - (x_grid-kfract_const_init);
+	y_grid = - (y_grid-kfract_const_init);
+
+	/*Assistance Index*/
+
+	x_grid_reset = x_grid;
+	y_grid_reset = y_grid;
 	int sum_idx = 0;
 
-	for(int jdx = 0;jdx<1000; jdx++)
+	/*Class member assignment*/
+	grid_vector_num = (kfract_const_init+(2*(-x_grid_reset)))/kfract_grid_constant;
+
+
+	for(int jdx = 0;jdx<=(kfract_const_init+(2*(-x_grid_reset)))/kfract_grid_constant; jdx++)
 	{
 
-		y_grid = -1;
-		for(int gdx=0;gdx<1000;gdx++)
+		y_grid = y_grid_reset;
+		for(int gdx=0;gdx<=(kfract_const_init+(2*(-y_grid_reset)))/kfract_grid_constant;gdx++)
 		{
 
 
@@ -60,8 +83,10 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 			kfract_grid[sum_idx][0] = x_grid;
 			kfract_grid[sum_idx].push_back(double());
 			kfract_grid[sum_idx][1] = y_grid;
+			kfract_grid[sum_idx].push_back(double());
+			kfract_grid[sum_idx][2] = 0;
 
-			//    std::cout << kfract_grid[sum_idx][0] << " " << kfract_grid[sum_idx][1] << std::endl;
+			std::cout << sum_idx << " " << kfract_grid[sum_idx][0] << " " << kfract_grid[sum_idx][1] << std::endl;
 
 			y_grid = y_grid + kfract_grid_constant;
 			sum_idx+=1;
@@ -238,8 +263,6 @@ int kfract::construct_kfract()
 		this->construct_kfract();
 
 
-	/*tags grid points*/
-	this->tag_grid(kfract_fractal);
 
 	return 0;
 }
@@ -273,33 +296,81 @@ int kfract::export_kfract_data()
 	return 0;
 }
 
-int kfract::tag_grid(std::vector<std::vector<double>> vec)
+int kfract::tag_grid()
 {
 	try
 	{
-	std::vector<std::vector<double>>::iterator it;
-	int index;
+		std::vector<std::vector<double>>::iterator it;
+		int index;
+		int jdex;
+		std::vector<int> edge_index_vec;
 
-	for(int jdx=0;jdx<vec.size()-1;jdx++)
-	{
-		std::cout << "vector: " << vec.at(jdx).at(0) << " " << vec.at(jdx).at(1) << std::endl;
-		std::vector<double> p = {vec.at(jdx).at(0),vec.at(jdx).at(1)};
-		it = std::find(kfract_grid.begin(), kfract_grid.end(), p);
-		index = std::distance(kfract_grid.begin(), it);
-		//std::cout << "values at *index*: "<< kfract_grid[index].at(0) << " " << kfract_grid[index].at(1) << std::endl;
-		kfract_grid[index].push_back(double());
-		kfract_grid[index][2] = -1;
-		std::cout << "values at index " << index << " "<< kfract_grid[index].at(0) << " " << kfract_grid[index].at(1) << " " << kfract_grid[index].at(2) << std::endl;
-	};
-}
+		std::cout << "size of kfract_fractl (NB! #double): "<< kfract_fractal.size() << std::endl;
+
+		for(int jdx=0;jdx<(kfract_fractal.size())/2;jdx++)
+		{
+
+			//std::cout << "vector: " << kfract_fractal.at(jdx).at(0) << " " << kfract_fractal.at(jdx).at(1) << std::endl;
+			std::vector<double> p = {kfract_fractal.at(jdx).at(0),kfract_fractal.at(jdx).at(1), 0};
+			it = std::find(kfract_grid.begin(), kfract_grid.end(), p);
+			index = std::distance(kfract_grid.begin(), it);
+			edge_index_vec.push_back(int(index));
+			/*-1 indicates grid point is located on EDGE of fractal*/
+			kfract_grid[index][2] = -1;
+			std::cout << "(" << jdx << ")values at index " << index << " "<< kfract_grid[index].at(0) << " " << kfract_grid[index].at(1) << " " << kfract_grid[index].at(2) << std::endl;
+		}
+
+		/*TODO #1*/
+		for(int idx=0;idx<((kfract_fractal.size())/2)/4; idx++)
+		{
+			int dummy = edge_index_vec[idx];
+			jdex = dummy%(grid_vector_num+1);
+			for(int jdx=jdex; jdx > 0; jdx=jdx-1)
+			{
+				dummy =  edge_index_vec[idx];
+				kfract_grid[dummy-jdx][3] = static_cast<int>(kfract_grid[edge_index_vec[idx]-jdx][3])  | 1;
+			}
+			for(int jdx=1; jdx <= grid_vector_num-jdex; jdx=jdx+1)
+			{
+				kfract_grid[edge_index_vec[idx]+jdx][3] = static_cast<int>(kfract_grid[edge_index_vec[idx]+jdx][3])  | 1;
+			}
+		}
+		/*#2*/
+		for(int idx=((kfract_fractal.size())/2)/4;idx<((kfract_fractal.size())/2)/2; idx++)
+		{
+
+
+		}
+
+		/*#3*/
+		for(int idx=kfract_fractal.size()/2/2; idx<((kfract_fractal.size())/2)-(kfract_fractal.size()/2/4); idx++)
+		{
+
+
+		}
+
+		/*#4*/
+		for(int idx=((kfract_fractal.size())/2)-(kfract_fractal.size())/2/4;idx<(kfract_fractal.size())/2;idx++)
+		{
+
+
+		}
+
+
+	}
 
 	catch(std::exception &e)
 	{
-		std::cout << "error occured: " << e.what() << std::endl;
+		std::cout << "error occurred: " << e.what() << std::endl;
 	}
 
 
 	return 0;
 }
 
+
+std::vector<std::vector<double>> kfract::get_kfract_fractal()
+{
+	return kfract_fractal;
+}
 

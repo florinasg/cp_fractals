@@ -19,7 +19,7 @@ int main(int args, char * argv[])
 	/*Constructs koch fractal*/
 	koch_fractal_1->construct_kfract();
 
-
+	koch_fractal_1->tag_grid();
 
 	koch_fractal_1->export_kfract_data();
 
