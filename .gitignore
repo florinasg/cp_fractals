@@ -1,6 +1,6 @@
 /Release/
 /Debug/
-/kfract_data.txt
+/kfract_data*
 /.cproject
 /.project
 /.settings

@@ -27,6 +27,8 @@ public:
 	
 	int tag_grid();
 	
+	int export_grid_data();
+	
 	
 	std::vector<std::vector<double>> get_kfract_fractal();
 

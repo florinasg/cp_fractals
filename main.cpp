@@ -23,6 +23,8 @@ int main(int args, char * argv[])
 
 	koch_fractal_1->export_kfract_data();
 
+	koch_fractal_1->export_grid_data();
+
 
 
 	return 0;
