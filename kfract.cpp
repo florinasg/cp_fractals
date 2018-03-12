@@ -243,8 +243,6 @@ int kfract::construct_kfract()
 			kfract_fractal[jdx].push_back(double());
 			kfract_fractal[jdx][1] = temp_coord_matrix.at(jdx-curr_pos).at(1);
 
-
-
 		}
 
 		curr_pos = jdx;
@@ -291,7 +289,7 @@ int kfract::export_kfract_data()
 	kfract_data << "0" << "," << kfract_const_init << "\n";
 	kfract_data.close();
 
-	std::cout << "Finished successfully\n" <<"Grid constant 'rho': "<< kfract_grid_constant << std::endl;
+	std::cout << "(EXPORT FRACTAL DATA)...Finished successfully\n" << "Grid constant 'rho': "<< kfract_grid_constant << std::endl;
 
 	return 0;
 }
@@ -305,15 +303,15 @@ int kfract::export_grid_data()
 	kfract_data.open("kfract_grid_data"+std::to_string(level_final)+".csv");
 
 	/*Loop writes data to file*/
-	for(idx=0;idx < kfract_grid.size();idx++)
+	for(idx=0;idx < (grid_vector_num+1)*(grid_vector_num+1);idx++)
 	{
-		kfract_data << kfract_grid.at(idx).at(0) << "," << kfract_grid.at(idx).at(1) <<  kfract_grid.at(idx).at(2) <<"\n";
+		kfract_data << kfract_grid.at(idx).at(0) << "," << kfract_grid.at(idx).at(1) << "," <<  kfract_grid.at(idx).at(2) <<"\n";
 	}
 
-	kfract_data << "0" << "," << kfract_const_init << "\n";
+	kfract_data << "0" << "," << kfract_const_init << "," << "-1" << "\n";
 	kfract_data.close();
 
-	std::cout << "Finished successfully\n" <<"Grid constant 'rho': "<< kfract_grid_constant << std::endl;
+	std::cout << "(EXPORT GRID DATA) ... Finished successfully\n" <<  std::endl;
 
 	return 0;
 }
@@ -352,12 +350,18 @@ int kfract::tag_grid()
 			std::cout << "(" << jdx << ")values at index " << index << " "<< kfract_grid[index].at(0) << " " << kfract_grid[index].at(1) << " " << kfract_grid[index].at(2) << std::endl;
 		}
 
+
+
+		/*----------------------------------------------------------------------------------*/
+
 		/*TODO #1 -> tags grid points within fractal UPPER EDGE*/
-		for(int idx=0;idx<((kfract_fractal.size())/2)/4; idx++)
+		for(int idx=0;idx<=(((kfract_fractal.size())/2)/4); idx++)
 		{
 			int dummy_idx = edge_index_vec[idx];
+
 			/*jdex denotes the distance from the beginning of a new coordinate block (INDEX!!!)*/
 			jdex = dummy_idx % (grid_vector_num+1);
+
 			/*grid points UNDER edge point*/
 			for(int jdx=jdex; jdx > 0; jdx=jdx-1)
 			{
@@ -375,13 +379,15 @@ int kfract::tag_grid()
 
 		std::cout << "RIGHT EDGE" << std::endl;
 
-		/*#2 RIGHT EDGE*/
-		for(int idx=((kfract_fractal.size())/2)/4;idx<((kfract_fractal.size())/2)/2; idx++)
+		/*#2 RIGHT EDGE
+		 * NOTE THE '+1' in the initial value for idx*/
+		for(int idx=(((kfract_fractal.size())/2)/4)+1;idx<((kfract_fractal.size())/2)/2; idx++)
 		{
 			int dummy_idx = edge_index_vec[idx];
 
 			/*jdex denotes the distance from the beginning of a new coordinate block (INDEX!!!)*/
 			jdex = dummy_idx%(grid_vector_num+1);
+			
 			/*floor rounds down value; jdex_2 denotes the current block of coordinates*/
 			jdex_2 = floor(edge_index_vec[idx]/(grid_vector_num+1));
 
@@ -405,7 +411,7 @@ int kfract::tag_grid()
 		std::cout << "LOWER EDGE" << std::endl;
 
 		/*#3 LOWER EDGE (has to redo down area)*/
-		for(int idx=kfract_fractal.size()/2/2; idx<((kfract_fractal.size())/2)-(kfract_fractal.size()/2/4); idx++)
+		for(int idx=(kfract_fractal.size()/2/2); idx<=((kfract_fractal.size())/2)-(kfract_fractal.size()/2/4); idx++)
 		{
 			int dummy_idx = edge_index_vec[idx];
 			/*jdex denotes the distance from the beginning of a new coordinate block (INDEX!!!)*/
@@ -429,7 +435,7 @@ int kfract::tag_grid()
 		std::cout << "LEFT EDGE" << std::endl;
 
 		/*#4 LEFT EDGE (has to redo left area)*/
-		for(int idx=((kfract_fractal.size())/2)-(kfract_fractal.size())/2/4;idx<(kfract_fractal.size())/2;idx++)
+		for(int idx=(((kfract_fractal.size())/2)-(kfract_fractal.size())/2/4);idx<(kfract_fractal.size())/2;idx++)
 		{
 			int dummy_idx = edge_index_vec[idx];
 
