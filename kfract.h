@@ -21,6 +21,9 @@ public:
 
 	/*construt_kfract gets called recursively*/
 	int construct_kfract();
+
+	int compute_eigenvalues();
+
 	int get_level();
 
 	int export_kfract_data();
