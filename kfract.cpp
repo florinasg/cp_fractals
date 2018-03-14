@@ -378,8 +378,8 @@ int kfract::tag_grid()
 				nplusone = kfract_fractal[idx+1] = {0,1};
 
 
-//			std::cout << "n " << n[0] << " " << n[1] << std::endl;
-//			std::cout << "nplusone " << nplusone[0] << " " << nplusone[1] << std::endl;
+			//			std::cout << "n " << n[0] << " " << n[1] << std::endl;
+			//			std::cout << "nplusone " << nplusone[0] << " " << nplusone[1] << std::endl;
 
 
 			if((n[1]-nplusone[1] == 0) && (n[0] < nplusone[0]))
@@ -533,7 +533,47 @@ int kfract::tag_grid()
 			}
 
 
+			/*grid points RIGHT of the right edge */
+			for(int jdx=jdex_2+1; jdx < grid_vector_num; jdx=jdx+1)
+			{
+				//std::cout << "VOR " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] <<" " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
+
+				/*TODO NB! CONDITION */
+				if(kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] == 1)
+					kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] = 0;
+
+				//std::cout << "NACH "<<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] << " " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
+			}
+
+
+
 		}
+
+		/*NECESSARY SECOND ITERATION OF UPPER EDGE (14.03.2018)*/
+		for(int idx=0;idx<=(((edge_index_vec.size()))/4); idx++)
+		{
+			int dummy_idx = edge_index_vec[idx];
+
+			/*jdex denotes the distance from the beginning of a new coordinate block (INDEX!!!)
+			 * +1 because the first value is also included */
+			jdex = dummy_idx % (grid_vector_num+1);
+
+			/*grid points UNDER edge point*/
+			for(int jdx=1; jdx < (grid_vector_num+1)-jdex; jdx=jdx+1)
+			{
+				//std::cout << "VOR " <<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] <<" " << kfract_grid[dummy_idx-jdx][2] <<std::endl;
+
+				/*TODO NB! CONDITION */
+				if(kfract_grid[dummy_idx+jdx][2] == 1 )
+					kfract_grid[dummy_idx+jdx][2] = 0;
+
+				//std::cout << "NACH "<<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] << " " <<kfract_grid[dummy_idx-jdx][2] <<std::endl;
+			}
+
+		}
+
+
+
 
 		//std::cout << "LOWER EDGE" << std::endl;
 
