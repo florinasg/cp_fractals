@@ -37,7 +37,7 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 	kfract_const_init = kfract_const;
 	kfract_grid_constant = kfract_const_init;
 
-
+	/*TODO: VERIiFY L_MAX*/
 	int l_max = 5;
 
 	for(int idx = 0; idx <l_max; idx++)
@@ -470,7 +470,7 @@ int kfract::tag_grid()
 
 
 			/*TODO: FIND GENERIC TERM*/
-			hitcount_offset= hitcount_offset + 4;
+			hitcount_offset= hitcount_offset + (kfract_const/kfract_grid_constant);
 
 		}
 
@@ -492,19 +492,19 @@ int kfract::tag_grid()
 			/*grid points UNDER edge point*/
 			for(int jdx=jdex; jdx > 0; jdx=jdx-1)
 			{
-				std::cout << "VOR " <<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] <<" " << kfract_grid[dummy_idx-jdx][2] <<std::endl;
+				//std::cout << "VOR " <<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] <<" " << kfract_grid[dummy_idx-jdx][2] <<std::endl;
 
 				/*TODO NB! CONDITION */
 				if(kfract_grid[dummy_idx-jdx][2] == 0)
 					kfract_grid[dummy_idx-jdx][2] = 1;
 
-				std::cout << "NACH "<<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] << " " <<kfract_grid[dummy_idx-jdx][2] <<std::endl;
+				//std::cout << "NACH "<<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] << " " <<kfract_grid[dummy_idx-jdx][2] <<std::endl;
 			}
 
 		}
 
 
-		std::cout << "RIGHT EDGE" << std::endl;
+		//std::cout << "RIGHT EDGE" << std::endl;
 
 		/*#2 RIGHT EDGE
 		 * NOTE THE '+1' in the initial value for idx*/
@@ -523,19 +523,19 @@ int kfract::tag_grid()
 			/*grid points left of edge point TODO Validate*/
 			for(int jdx=0; jdx < jdex_2; jdx=jdx+1)
 			{
-				std::cout << "VOR " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] <<" " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
+				//std::cout << "VOR " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] <<" " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
 
 				/*TODO NB! CONDITION */
 				if(kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] == 0)
 					kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] = 1;
 
-				std::cout << "NACH "<<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] << " " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
+				//std::cout << "NACH "<<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] << " " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
 			}
 
 
 		}
 
-		std::cout << "LOWER EDGE" << std::endl;
+		//std::cout << "LOWER EDGE" << std::endl;
 
 		/*#3 LOWER EDGE (has to redo down area)*/
 		for(int idx=(edge_index_vec.size()/2); idx<=((edge_index_vec.size()))-(edge_index_vec.size()/4); idx++)
@@ -547,20 +547,20 @@ int kfract::tag_grid()
 			/*grid points UNDER edge point*/
 			for(int jdx=jdex; jdx > 0; jdx=jdx-1)
 			{
-				std::cout << "VOR " <<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] <<" " << kfract_grid[dummy_idx-jdx][2] <<std::endl;
+				//std::cout << "VOR " <<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] <<" " << kfract_grid[dummy_idx-jdx][2] <<std::endl;
 
 				/*TODO NB! CONDITION */
 				if(kfract_grid[dummy_idx-jdx][2] == 1)
 					kfract_grid[dummy_idx-jdx][2] = 0;
 
-				std::cout << "NACH "<<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] << " " <<kfract_grid[dummy_idx-jdx][2] <<std::endl;
+				//std::cout << "NACH "<<kfract_grid[dummy_idx-jdx][0] << " " << kfract_grid[dummy_idx-jdx][1] << " " <<kfract_grid[dummy_idx-jdx][2] <<std::endl;
 			}
 
 
 		}
 
 
-		std::cout << "LEFT EDGE" << std::endl;
+		//std::cout << "LEFT EDGE" << std::endl;
 
 		/*#4 LEFT EDGE (has to redo left area)*/
 		for(int idx=(((edge_index_vec.size()))-(edge_index_vec.size())/4);idx<(edge_index_vec.size());idx++)
@@ -577,13 +577,13 @@ int kfract::tag_grid()
 			/*grid points left of edge point TODO Validate*/
 			for(int jdx=0; jdx < jdex_2; jdx=jdx+1)
 			{
-				std::cout << "VOR " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] <<" " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
+				//std::cout << "VOR " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] <<" " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
 
 				/*TODO NB! CONDITION */
 				if(kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] == 1)
 					kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] = 0;
 
-				std::cout << "NACH "<<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] << " " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
+				//std::cout << "NACH "<<kfract_grid[jdex+(jdx*(grid_vector_num+1))][0] << " " << kfract_grid[jdex+(jdx*(grid_vector_num+1))][1] << " " <<kfract_grid[jdex+(jdx*(grid_vector_num+1))][2] <<std::endl;
 			}
 
 
