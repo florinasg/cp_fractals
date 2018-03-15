@@ -24,6 +24,8 @@ public:
 
 	int compute_eigenvalues();
 
+	int get_five_point_stencil(std::vector<double> grid_point, int grid_idx);
+
 	int get_level();
 
 	int export_kfract_data();

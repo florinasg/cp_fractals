@@ -38,7 +38,7 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 	kfract_grid_constant = kfract_const_init;
 
 	/*TODO: VERIiFY L_MAX*/
-	int l_max = 5;
+	int l_max = 2;
 
 	for(int idx = 0; idx <l_max; idx++)
 	{
@@ -549,7 +549,7 @@ int kfract::tag_grid()
 
 		}
 
-		/*NECESSARY SECOND ITERATION OF UPPER EDGE (14.03.2018)*/
+		/*NECESSARY SECOND ITERATION OF UPPER EDGE TO UPDDATE FALSELY ASSIGNED VALUES BY FORMER ITERATION OF (14.03.2018)*/
 		for(int idx=0;idx<=(((edge_index_vec.size()))/4); idx++)
 		{
 			int dummy_idx = edge_index_vec[idx];
