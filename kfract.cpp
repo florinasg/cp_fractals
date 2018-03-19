@@ -22,7 +22,8 @@ kfract::kfract() : level_final(0) , kfract_const(1)
 
 }
 
-kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : level_final(Level_final) , kfract_const(Kfract_const), kfract_vector_L(Kfract_vector_L)
+kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L, int L_Max) : level_final(Level_final) , kfract_const(Kfract_const),
+		kfract_vector_L(Kfract_vector_L), l_max(L_Max)
 {
 	level_current = 0;
 
@@ -38,7 +39,7 @@ kfract::kfract(int Level_final, double Kfract_const, int Kfract_vector_L) : leve
 	kfract_grid_constant = kfract_const_init;
 
 	/*TODO: VERIiFY L_MAX*/
-	int l_max = 2;
+
 
 	for(int idx = 0; idx <l_max; idx++)
 	{
@@ -106,6 +107,8 @@ kfract::~kfract()
 {
 
 }
+
+
 
 
 int kfract::construct_kfract()
@@ -271,11 +274,14 @@ int kfract::construct_kfract()
 }
 
 
-
-int kfract::get_level()
+int kfract::get_five_point_stencil(std::vector<double> point)
 {
-	return level_current;
+
+
+
+return 0;
 }
+
 
 
 

@@ -15,7 +15,7 @@ class kfract {
 
 public:
 	kfract();
-	kfract(int Level_final, double Kfract_const, int Kfract_vector_L);
+	kfract(int Level_final, double Kfract_const, int Kfract_vector_L, int l_max);
 
 	virtual ~kfract();
 
@@ -34,6 +34,9 @@ public:
 	
 	int export_grid_data();
 	
+	int get_five_point_stencil(std::vector<double> point);
+
+
 	
 	std::vector<std::vector<double>> get_kfract_fractal();
 
@@ -47,6 +50,7 @@ private:
 	double kfract_const_init;
 	int grid_vector_num;
 	
+	int l_max;
 	
 	double kfract_grid_constant;
 	

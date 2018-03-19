@@ -26,6 +26,7 @@
 								<option id="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level.611188424" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.debug.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.max" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.1922154197" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\libs\armadillo-8.300.4\include&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.dialect.std.838330755" name="Language standard" superClass="gnu.cpp.compiler.option.dialect.std" useByScannerDiscovery="true" value="gnu.cpp.compiler.dialect.c++11" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.other.other.1950585865" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0  -std=c++11" valueType="string"/>
@@ -38,6 +39,13 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug.1497009247" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.debug"/>
 							<tool command="g++" commandLinePattern="${COMMAND} ${FLAGS} ${OUTPUT_FLAG} ${OUTPUT_PREFIX}${OUTPUT} ${INPUTS}" errorParsers="org.eclipse.cdt.core.GLDErrorParser" id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug.1965978134" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.debug">
+								<option id="gnu.cpp.link.option.libs.271664705" superClass="gnu.cpp.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="blas"/>
+									<listOptionValue builtIn="false" value="lapack"/>
+								</option>
+								<option id="gnu.cpp.link.option.paths.320998818" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;C:\libs&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1006880429" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -74,6 +82,7 @@
 								<option id="gnu.cpp.compiler.mingw.exe.release.option.debugging.level.365609455" name="Debug Level" superClass="gnu.cpp.compiler.mingw.exe.release.option.debugging.level" useByScannerDiscovery="false" value="gnu.cpp.compiler.debugging.level.none" valueType="enumerated"/>
 								<option id="gnu.cpp.compiler.option.include.paths.2006704405" name="Include paths (-I)" superClass="gnu.cpp.compiler.option.include.paths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;C:\libs\armadillo-8.300.4\include&quot;"/>
 								</option>
 								<option id="gnu.cpp.compiler.option.other.other.490064118" name="Other flags" superClass="gnu.cpp.compiler.option.other.other" useByScannerDiscovery="false" value="-c -fmessage-length=0 -Wno-sign-compare" valueType="string"/>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.compiler.input.2050299628" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.input"/>
@@ -85,6 +94,13 @@
 							</tool>
 							<tool id="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release.452450202" name="MinGW C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.mingw.exe.release"/>
 							<tool id="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release.1676201648" name="MinGW C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.mingw.exe.release">
+								<option id="gnu.cpp.link.option.libs.860211133" superClass="gnu.cpp.link.option.libs" valueType="libs">
+									<listOptionValue builtIn="false" value="blas"/>
+									<listOptionValue builtIn="false" value="lapack"/>
+								</option>
+								<option id="gnu.cpp.link.option.paths.1677397534" superClass="gnu.cpp.link.option.paths" valueType="libPaths">
+									<listOptionValue builtIn="false" value="&quot;C:\libs&quot;"/>
+								</option>
 								<inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.1533066741" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -100,21 +116,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="fractals.cdt.managedbuild.target.gnu.mingw.exe.1967751190" name="Executable" projectType="cdt.managedbuild.target.gnu.mingw.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.763510108;cdt.managedbuild.config.gnu.mingw.exe.debug.763510108.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1900853462;cdt.managedbuild.tool.gnu.c.compiler.input.407362778">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.881846244;cdt.managedbuild.config.gnu.mingw.exe.release.881846244.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.release.1400429544;cdt.managedbuild.tool.gnu.cpp.compiler.input.2050299628">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.881846244;cdt.managedbuild.config.gnu.mingw.exe.release.881846244.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.1116118233;cdt.managedbuild.tool.gnu.c.compiler.input.1053165986">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.763510108;cdt.managedbuild.config.gnu.mingw.exe.debug.763510108.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.320994770;cdt.managedbuild.tool.gnu.cpp.compiler.input.1452183936">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Debug">
@@ -126,4 +127,31 @@
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.881846244;cdt.managedbuild.config.gnu.mingw.exe.release.881846244.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.release.1400429544;cdt.managedbuild.tool.gnu.cpp.compiler.input.2050299628">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.881846244;cdt.managedbuild.config.gnu.mingw.exe.release.881846244.;cdt.managedbuild.tool.gnu.c.compiler.mingw.base.278759653;cdt.managedbuild.tool.gnu.c.compiler.input.32823098">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.763510108;cdt.managedbuild.config.gnu.mingw.exe.debug.763510108.;cdt.managedbuild.tool.gnu.c.compiler.mingw.base.779730650;cdt.managedbuild.tool.gnu.c.compiler.input.632288000">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.881846244;cdt.managedbuild.config.gnu.mingw.exe.release.881846244.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.release.1116118233;cdt.managedbuild.tool.gnu.c.compiler.input.1053165986">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.763510108;cdt.managedbuild.config.gnu.mingw.exe.debug.763510108.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.2035561462;cdt.managedbuild.tool.gnu.cpp.compiler.input.1622628165">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.763510108;cdt.managedbuild.config.gnu.mingw.exe.debug.763510108.;cdt.managedbuild.tool.gnu.c.compiler.mingw.exe.debug.1900853462;cdt.managedbuild.tool.gnu.c.compiler.input.407362778">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.debug.763510108;cdt.managedbuild.config.gnu.mingw.exe.debug.763510108.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.exe.debug.320994770;cdt.managedbuild.tool.gnu.cpp.compiler.input.1452183936">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="cdt.managedbuild.config.gnu.mingw.exe.release.881846244;cdt.managedbuild.config.gnu.mingw.exe.release.881846244.;cdt.managedbuild.tool.gnu.cpp.compiler.mingw.base.61731246;cdt.managedbuild.tool.gnu.cpp.compiler.input.820268096">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>
