@@ -24,7 +24,6 @@ public:
 
 	int compute_eigenvalues();
 
-	int get_five_point_stencil(std::vector<double> grid_point, int grid_idx);
 
 	int get_level();
 
@@ -34,7 +33,7 @@ public:
 	
 	int export_grid_data();
 	
-	int get_five_point_stencil(std::vector<double> point);
+
 
 
 	

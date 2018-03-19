@@ -274,13 +274,7 @@ int kfract::construct_kfract()
 }
 
 
-int kfract::get_five_point_stencil(std::vector<double> point)
-{
 
-
-
-return 0;
-}
 
 
 
