@@ -112,6 +112,9 @@ int kfract::compute_eigenvalues()
 		/*Computes 10 smallest eigenvalues*/
 	    arma::eig_sym(eigval,eigvec,A);
 
+
+	    std::cout<< "Eigenvalues" << eigval << std::endl;
+
 	}
 
 
