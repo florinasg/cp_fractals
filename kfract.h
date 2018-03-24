@@ -6,6 +6,8 @@
  */
 
 #include <vector>
+#include <sstream>
+#include <string>
 
 
 #ifndef KFRACT_H_
