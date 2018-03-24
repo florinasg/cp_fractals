@@ -102,6 +102,8 @@ int kfract::compute_eigenvalues()
 
 		}
 
+
+		A = A / (level_final*level_final);
 		A.save("A_matrix.txt", arma::arma_ascii);
 
 
@@ -111,6 +113,10 @@ int kfract::compute_eigenvalues()
 
 		/*Computes 10 smallest eigenvalues*/
 	    arma::eig_sym(eigval,eigvec,A);
+
+
+	    eigval.save("Eigenvalues.csv", arma::arma_ascii);
+	    eigvec.save("Eigenvectors.csv", arma::arma_ascii);
 
 
 	    std::cout<< "Eigenvalues" << eigval << std::endl;
