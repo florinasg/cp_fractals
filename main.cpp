@@ -9,7 +9,7 @@
 #include <cstdlib>
 
 #define KFRACT_BASE_CONST 1
-#define L_MAX 2
+#define L_MAX 5
 
 int main(int args, char * argv[])
 {

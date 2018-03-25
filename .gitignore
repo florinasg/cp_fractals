@@ -1,4 +1,7 @@
-/Release/
-/Debug/
+/Release/*
+/Debug/*
 *.o
 *.txt
+*.csv
+/Debug/
+/Release/
