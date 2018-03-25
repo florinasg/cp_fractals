@@ -98,7 +98,7 @@ int kfract::compute_eigenvalues()
 					row_idx ++;
 			}
 
-			std::cout << std::endl;
+
 
 		}
 
