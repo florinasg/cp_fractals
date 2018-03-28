@@ -20,6 +20,8 @@ int kfract::compute_eigenvalues()
 
 	try{
 
+
+
 		/*denotes total number of gridpoints and hence A matrix dimension*/
 		int matrix_dim = kfract_grid.size();
 
@@ -104,8 +106,8 @@ int kfract::compute_eigenvalues()
 
 		
 		
-		A = A / (kfract_grid_constant*kfract_grid_constant); 
-		A.save("A_matrix.csv", arma::arma_ascii);
+//		A = A / (kfract_grid_constant*kfract_grid_constant);
+//		A.save("A_matrix.csv", arma::arma_ascii);
 
 //		/ generate sparse matrix
 //		sp_mat A = sprandu<sp_mat>(1000, 1000, 0.1);
@@ -116,14 +118,13 @@ int kfract::compute_eigenvalues()
 //		eigs_gen(eigval, eigvec, A, 5);  // find 5 eigenvalues/eigenvectors
 
 
-		arma::vec eigval;
-		arma::mat eigvec;
+
 
 		/*Computes 10 smallest eigenvalues*/
 	    arma::eigs_sym(eigval,eigvec,A,10);
 
 	    eigval.save("Eigenvalues.csv", arma::arma_ascii);
-	    eigval.save("Eigenvectors.csv", arma::arma_ascii);
+	    eigvec.save("Eigenvectors.csv", arma::arma_ascii);
 
 
 	    std::cout<< "Eigenvalues" << eigval << std::endl;

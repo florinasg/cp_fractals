@@ -39,6 +39,8 @@ int main(int args, char * argv[])
 
 	koch_fractal_1->compute_eigenvalues();
 
+	koch_fractal_1->export_EIGENMODE();
+
 
 
 	return 0;
