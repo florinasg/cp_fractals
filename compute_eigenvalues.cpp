@@ -106,7 +106,7 @@ int kfract::compute_eigenvalues()
 
 		
 		
-//		A = A / (kfract_grid_constant*kfract_grid_constant);
+		A = A / (kfract_grid_constant*kfract_grid_constant);
 //		A.save("A_matrix.csv", arma::arma_ascii);
 
 //		/ generate sparse matrix
@@ -121,7 +121,7 @@ int kfract::compute_eigenvalues()
 
 
 		/*Computes 10 smallest eigenvalues*/
-	    arma::eigs_sym(eigval,eigvec,A,10);
+	    arma::eigs_sym(eigval,eigvec,A,100);
 
 	    eigval.save("Eigenvalues.csv", arma::arma_ascii);
 	    eigvec.save("Eigenvectors.csv", arma::arma_ascii);

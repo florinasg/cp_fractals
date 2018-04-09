@@ -36,15 +36,24 @@ int kfract::export_EIGENMODE()
 				{
 					kfract_grid[grid_index].push_back(double(EIG[eigenvec_index]));
 					eigenmode << kfract_grid.at(grid_index).at(0) << "," << kfract_grid.at(grid_index).at(1) << "," <<  kfract_grid.at(grid_index).at(2) <<","
-											<<kfract_grid.at(grid_index).at(3)<<"\n";
+							<<kfract_grid.at(grid_index).at(3)<<"\n";
 				}
 				else if (kfract_grid[grid_index][2] == -1)
 				{
 					kfract_grid[grid_index].push_back(double(0));
 					eigenmode << kfract_grid.at(grid_index).at(0) << "," << kfract_grid.at(grid_index).at(1) << "," <<  kfract_grid.at(grid_index).at(2) <<","
-											<<kfract_grid.at(grid_index).at(3)<<"\n";
+							<<kfract_grid.at(grid_index).at(3)<<"\n";
 				}
 
+
+				/*Questionable if comment or uncomment*/
+//				else if(kfract_grid[grid_index][2] == 0)
+//				{
+//					kfract_grid[grid_index].push_back(double(0));
+//					eigenmode << kfract_grid.at(grid_index).at(0) << "," << kfract_grid.at(grid_index).at(1) << "," <<  kfract_grid.at(grid_index).at(2) <<","
+//							<<kfract_grid.at(grid_index).at(3)<<"\n";
+//
+//				}
 
 				eigenvec_index ++;
 			}
