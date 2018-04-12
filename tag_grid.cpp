@@ -173,19 +173,23 @@ int kfract::tag_grid()
 		/*JORDAN CURVE THEOREM*/
 
 		std::vector<double> current_shaft = {0};
+		std::vector<double> current_shaft_left = {0};
+		std::vector<double> current_shaft_right = {0};
 		std::vector<double> running_line = {0};
 		std::vector<double> running_line_plusone = {0};
 		int cross_sections = 0;
 		bool cross_section_indicator = false;
 		int cross_section_scope_counter = 0;
 		int main_indx = 0;
+		bool left_adj = false;
+		bool right_adj = false;
 
 
 
 		int dist = 0;
 
-		/*NB loop boundrary*/
-		for(int i = 0; i <= grid_vector_num; i++)
+		/*NB loop boundrary -> adapted*/
+		for(int i = 1; i < grid_vector_num; i++)
 		{
 			/*every grid point*/
 			for(int j = 0; j <=grid_vector_num; j++)
@@ -196,6 +200,7 @@ int kfract::tag_grid()
 				{
 					current_shaft = kfract_grid[main_indx];
 
+
 					std::cout << "shaft " << current_shaft[0] << " " << current_shaft[1] << std::endl;
 
 
@@ -205,23 +210,42 @@ int kfract::tag_grid()
 
 
 						running_line = kfract_grid[running_idx];
+
 						//std::cout << running_line[0] << " " << running_line[1] <<" " << running_line[2] <<std::endl;
 						if(running_line[2] == -1)
 						{
 
+
+
+							if(running_idx == main_indx+(grid_vector_num-j))
+								cross_sections++;
+
+							current_shaft_left = kfract_grid[running_idx-(grid_vector_num+1)];
+							current_shaft_right = kfract_grid[running_idx+(grid_vector_num+1)];
+
 							cross_section_indicator = true;
 							cross_section_scope_counter+=1;
+
+							if((current_shaft_left[2] == -1) && (left_adj == false))
+								left_adj = true;
+
+
+							if((current_shaft_right[2] == -1) && (right_adj == false))
+								right_adj = true;
+
 							//std::cout << "-1 " << cross_section_indicator <<  " "<< cross_section_scope_counter<<std::endl;
 						}
 						else
 						{
-							if((cross_section_indicator == true) && (cross_section_scope_counter == 1))
+							if((cross_section_indicator == true) && (right_adj == true) && (left_adj == true))
 							{
 								//std::cout << "HIT" << running_line[0] << " " << running_line[1] << std::endl;
 								cross_sections+=1;
 							}
 							cross_section_scope_counter = 0;
 							cross_section_indicator = false;
+							left_adj = false;
+							right_adj = false;
 						}
 
 
