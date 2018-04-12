@@ -121,7 +121,7 @@ int kfract::compute_eigenvalues()
 
 
 		/*Computes 10 smallest eigenvalues*/
-	    arma::eigs_sym(eigval,eigvec,A,100);
+	    arma::eigs_sym(eigval,eigvec,A,10);
 
 	    eigval.save("Eigenvalues.csv", arma::arma_ascii);
 	    eigvec.save("Eigenvectors.csv", arma::arma_ascii);

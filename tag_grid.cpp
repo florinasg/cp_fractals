@@ -174,38 +174,72 @@ int kfract::tag_grid()
 
 		std::vector<double> current_shaft = {0};
 		std::vector<double> running_line = {0};
+		std::vector<double> running_line_plusone = {0};
 		int cross_sections = 0;
+		bool cross_section_indicator = false;
+		int cross_section_scope_counter = 0;
+		int main_indx = 0;
+
+
 
 		int dist = 0;
 
 		/*NB loop boundrary*/
 		for(int i = 0; i <= grid_vector_num; i++)
 		{
+			/*every grid point*/
 			for(int j = 0; j <=grid_vector_num; j++)
 			{
+				main_indx = (i*(grid_vector_num+1)) +j;
 
-				current_shaft = kfract_grid[j];
-
-				dist = (grid_vector_num)-(j);
-				bool current_shaft_status;
-
-				for(int running_idx = j+1; running_idx <= grid_vector_num; running_idx++  )
+				if(kfract_grid[main_indx][2] != -1)
 				{
-					running_line = kfract_grid[running_idx];
-					if(running_line[2] == -1)
+					current_shaft = kfract_grid[main_indx];
+
+					std::cout << "shaft " << current_shaft[0] << " " << current_shaft[1] << std::endl;
+
+
+					/*every point in the current column*/
+					for(int running_idx = main_indx+1; running_idx <=main_indx+(grid_vector_num-j); running_idx++  )
 					{
-						cross_sections++;
+
+
+						running_line = kfract_grid[running_idx];
+						//std::cout << running_line[0] << " " << running_line[1] <<" " << running_line[2] <<std::endl;
+						if(running_line[2] == -1)
+						{
+
+							cross_section_indicator = true;
+							cross_section_scope_counter+=1;
+							//std::cout << "-1 " << cross_section_indicator <<  " "<< cross_section_scope_counter<<std::endl;
+						}
+						else
+						{
+							if((cross_section_indicator == true) && (cross_section_scope_counter == 1))
+							{
+								//std::cout << "HIT" << running_line[0] << " " << running_line[1] << std::endl;
+								cross_sections+=1;
+							}
+							cross_section_scope_counter = 0;
+							cross_section_indicator = false;
+						}
+
+
 					}
+
+
+					if((cross_sections%2) != 0)
+					{
+						std::cout << "Inside " << kfract_grid[main_indx][0] << " "<<  kfract_grid[main_indx][1] << std::endl;
+						kfract_grid[main_indx][2] = 1;
+					}
+
+					cross_sections = 0;
+
+					cross_section_scope_counter = 0;
+					cross_section_indicator = false;
+
 				}
-
-
-				if((cross_sections%2) != 0)
-				{
-					kfract_grid[j][2] == 1;
-				}
-
-				cross_sections = 0;
-
 
 			}
 		}
