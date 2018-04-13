@@ -9,14 +9,14 @@
 #include <cstdlib>
 
 #define KFRACT_BASE_CONST 1
-#define L_MAX 3
+#define L_MAX 5
 
 int main(int args, char * argv[])
 {
 	/*Configures koch fractal*/
 	std::cout << "Desired level (l) of koch fractal: " << argv[1] <<"\n";
 
-	if(atoi(argv[1]) > L_MAX)
+	if(atoi(argv[1]) >= L_MAX)
 	{
 		std::cout << "ERROR: Desired LEVEL cannot be computed by system" << "\n";
 		return -1;
