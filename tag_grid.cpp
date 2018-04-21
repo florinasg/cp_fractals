@@ -194,14 +194,19 @@ int kfract::tag_grid()
 			/*every grid point*/
 			for(int j = 0; j <=grid_vector_num; j++)
 			{
+				/*DEFINES GRID INDEX*/
 				main_indx = (i*(grid_vector_num+1)) +j;
 
 				if(kfract_grid[main_indx][2] != -1)
 				{
 					current_shaft = kfract_grid[main_indx];
 
+					/*Possible Fix*/
+					left_adj = false;
+					right_adj = false;
 
-					std::cout << "shaft " << current_shaft[0] << " " << current_shaft[1] << std::endl;
+
+					//std::cout << "shaft " << current_shaft[0] << " " << current_shaft[1] << std::endl;
 
 
 					/*every point in the current column*/
@@ -216,10 +221,16 @@ int kfract::tag_grid()
 						{
 
 
-
+							/*Handles special case of edge points being located at the grid edge*/
 							if(running_idx == main_indx+(grid_vector_num-j))
+							{
+								//std::cout <<current_shaft[0]<<" "<<current_shaft[1]<<" | "<< running_line[0] << " " << running_line[1] << std::endl;
 								cross_sections++;
+								left_adj = false;
+								right_adj = false;
+							}
 
+							/*refers actually to running line*/
 							current_shaft_left = kfract_grid[running_idx-(grid_vector_num+1)];
 							current_shaft_right = kfract_grid[running_idx+(grid_vector_num+1)];
 
@@ -227,11 +238,15 @@ int kfract::tag_grid()
 							cross_section_scope_counter+=1;
 
 							if((current_shaft_left[2] == -1) && (left_adj == false))
+							{
 								left_adj = true;
+							}
 
 
 							if((current_shaft_right[2] == -1) && (right_adj == false))
+							{
 								right_adj = true;
+							}
 
 							//std::cout << "-1 " << cross_section_indicator <<  " "<< cross_section_scope_counter<<std::endl;
 						}
@@ -254,7 +269,7 @@ int kfract::tag_grid()
 
 					if((cross_sections%2) != 0)
 					{
-						std::cout << "Inside " << kfract_grid[main_indx][0] << " "<<  kfract_grid[main_indx][1] << std::endl;
+						//std::cout << "Inside " << kfract_grid[main_indx][0] << " "<<  kfract_grid[main_indx][1] << std::endl;
 						kfract_grid[main_indx][2] = 1;
 					}
 
