@@ -2,7 +2,14 @@
  * tag_grid.cpp
  *
  *  Created on: 09.04.2018
- *      Author: Florian Anderl
+ *      Author: Sara Gasparini
+ *
+ *
+ *      Notes:
+ *        - tags grid-points:
+ *        0 -> outside fractal
+ *        1 -> inside fractal
+ *        -1 -> on fractal edge
  */
 
 #include "kfract.h"
@@ -19,9 +26,6 @@ int kfract::tag_grid()
 
 		std::vector<std::vector<double>>::iterator it;
 		int index;
-		int jdex;
-
-		int jdex_2;
 
 		/*edge_index_vec contains the indices of edge points within kfract_grid*/
 		std::vector<int> edge_index_vec;

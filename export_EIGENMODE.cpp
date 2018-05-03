@@ -2,7 +2,10 @@
  * export_EIGENMODE.cpp
  *
  *  Created on: 27.03.2018
- *      Author: Florian Anderl
+ *      Author: Sara Gasparini
+ *
+ *      Notes:
+ *      - exports Eigenmodes in csv-file
  */
 
 #include "kfract.h"
@@ -18,6 +21,8 @@ int kfract::export_EIGENMODE()
 	arma::vec EIG;
 	std::ofstream eigenmode;
 
+
+	eigvec = arma::conv_to<arma::mat>::from(eigvec_c);
 	for(hdx = 0; hdx < eigvec.n_cols; hdx++)
 	{
 		EIG = eigvec.col(hdx);
@@ -30,7 +35,9 @@ int kfract::export_EIGENMODE()
 			/*denotes the row index of THE GRID (NOT THE MATRIX)*/
 			for(int jdx = grid_vector_num; jdx >=0 ; jdx--)
 			{
-				/*reads the stored grid points column-wise top-down*/
+				/*reads the stored grid points column-wise TOP-to-BOTTOM
+				 * -> only writes the Eigenmode-grid point value to file if INSIDE or ON fractal-edge
+				 * -> grid index follows the same logic as in compute_eigenvalues.cpp*/
 				grid_index = (idx*(grid_vector_num+1))+jdx;
 				if(kfract_grid[grid_index][2] == 1)
 				{
@@ -46,19 +53,11 @@ int kfract::export_EIGENMODE()
 				}
 
 
-				/*Questionable if comment or uncomment*/
-//				else if(kfract_grid[grid_index][2] == 0)
-//				{
-//					kfract_grid[grid_index].push_back(double(0));
-//					eigenmode << kfract_grid.at(grid_index).at(0) << "," << kfract_grid.at(grid_index).at(1) << "," <<  kfract_grid.at(grid_index).at(2) <<","
-//							<<kfract_grid.at(grid_index).at(3)<<"\n";
-//
-//				}
-
 				eigenvec_index ++;
 			}
 
 		}
+
 		eigenmode.close();
 	}
 

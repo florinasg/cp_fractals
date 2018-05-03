@@ -70,6 +70,9 @@ private:
 	arma::vec eigval;
 	arma::mat eigvec;
 
+	arma::cx_vec eigval_c;
+	arma::cx_mat eigvec_c;
+
 };
 
 #endif /* KFRACT_H_ */
